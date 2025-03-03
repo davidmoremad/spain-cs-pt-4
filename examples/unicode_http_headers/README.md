@@ -8,6 +8,8 @@ Unicode es un estándar de codificación de caracteres diseñado para facilitar 
 
 Unicode define cada carácter o símbolo mediante un nombre e identificador numérico, el punto de código (code point). Además incluye otras informaciones para el uso correcto de cada carácter, como sistema de escritura, categoría, direccionalidad, mayúsculas y otros atributos. Unicode trata los caracteres alfabéticos, ideográficos y símbolos de forma equivalente, lo que significa que se pueden mezclar en un mismo texto sin utilizar marcas o caracteres de control.
 
+Puedes usar esta herramienta online para codificar y decodificar texto en Unicode:
+[https://checkserp.com/encode/unicode/](https://checkserp.com/encode/unicode/)
 
 # WAF Bypass
 
@@ -42,12 +44,13 @@ node server.js
 
 #### ❌ Prueba 1 - Petición legítima 
 
-Y lanzamos una petición con curl normal:
+Lanzamos una primera petición con curl:
+
 ```bash
-curl -sS -A "curl/7.64.1" http://localhost:3000
+curl -sS http://localhost:3000
 ```
 
-Respuesta:
+Al no usar User-Agent, o incluso si usamos un User-Agent legítimo, la respuesta será rechazada por el servidor:
 ```
 Denied: User-Agent 'curl' is blocked.
 ```
@@ -55,7 +58,7 @@ Denied: User-Agent 'curl' is blocked.
 
 #### ✅ Prueba 2 - Evasión con Unicode
 
-Y otra con Unicode:
+Lanzamos una segunda petición con curl, pero esta vez con un User-Agent que esconde un caracter Unicode:
 ```bash
 curl -sS -A "сurl/7.64.1" http://localhost:3000
 ```
